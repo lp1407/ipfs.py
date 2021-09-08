@@ -1,16 +1,9 @@
-def encrypt(text,s):
-    result = ""
- 
-    # traverse text
-    for i in range(len(text)):
-        char = text[i]
- 
-        # Encrypt uppercase characters
-        if (char.isupper()):
-            result += chr((ord(char) + s-65) % 26 + 65)
- 
-        # Encrypt lowercase characters
-        else:
-            result += chr((ord(char) + s - 97) % 26 + 97)
- 
-    return result
+def encrypt(key,plaintext):
+    ciphertext=""
+    #YOUR CODE HERE
+    return ciphertext
+
+def decrypt(key,ciphertext):
+    plaintext=""
+    #YOUR CODE HERE
+    return plaintext
