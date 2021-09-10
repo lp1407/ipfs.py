@@ -4,7 +4,7 @@ def encrypt(StringWord, intKey):
         wordHolder = StringWord[i]
 
         ciphertext += chr((ord(wordHolder)+intKey-65) % 26+65)
-        print(ciphertext)
+       
     return ciphertext
 
 def decrypt(key,ciphertext):
