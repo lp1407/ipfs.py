@@ -1,4 +1,4 @@
-def encrypt(key, plainte):
+def encrypt(key, plaintext):
     ciphertext = ""
     for i in range(len(plaintext)):
         wordHolder = plaintext[i]
