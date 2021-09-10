@@ -1,9 +1,9 @@
-def encrypt(StringWord, intKey):
+def encrypt(key, plaintext):
     ciphertext = ""
-    for i in range(len(StringWord)):
-        wordHolder = StringWord[i]
+    for i in range(len(plaintext)):
+        wordHolder = plaintext[i]
 
-        ciphertext += chr((ord(wordHolder)+intKey-65) % 26+65)
+        ciphertext += chr((ord(wordHolder)+key-65) % 26+65)
        
     return ciphertext
 
