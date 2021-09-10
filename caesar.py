@@ -1,11 +1,10 @@
 def encrypt(key,plaintext):
-    ciphertext=""
-      
+   ciphertext = ""
     for i in range(len(StringWord)):
-        ciphertext += chr((ord(StringWord[i])+intKey-65) % 26+65)
-        print((ord(StringWord[i])+intKey-65) % 26+65)
-        print(ciphertext)
-    return ciphertext
+        wordHolder =  StringWord[i]
+        
+        ciphertext += chr((ord(wordHolder+intKey-65) % 26+65))
+        return ciphertext
 
 def decrypt(key,ciphertext):
     plaintext=""
