@@ -11,11 +11,11 @@ def decrypt(key,ciphertext):
   alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   plaintext = ""
 
-    for letter in ciphertext:
-        if letter in alpha:
+  for letter in ciphertext:
+      if letter in alpha:
           
-            letter_index = (alpha.find(letter) - key) % len(alpha)
+         letter_index = (alpha.find(letter) - key) % len(alpha)
 
-            plaintext = plaintext + alpha[letter_index]
-        print(plaintext)
-    return plaintext
+         plaintext = plaintext + alpha[letter_index]
+       
+  return plaintext
