@@ -9,7 +9,7 @@ def encrypt(key, plaintext):
 
 def decrypt(key,ciphertext):
   alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    plaintext = ""
+  plaintext = ""
 
     for letter in ciphertext:
         if letter in alpha:
