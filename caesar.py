@@ -8,8 +8,14 @@ def encrypt(key, plaintext):
     return ciphertext
 
 def decrypt(key,ciphertext):
+  alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     plaintext = ""
-    for i in range(len(ciphertext)):
-        wordHolder = ciphertext[i]
-        plaintext += chr((ord(wordHolder) - key - 65) % 26 +65)
+
+    for letter in ciphertext:
+        if letter in alpha:
+          
+            letter_index = (alpha.find(letter) - key) % len(alpha)
+
+            plaintext = plaintext + alpha[letter_index]
+        print(plaintext)
     return plaintext
