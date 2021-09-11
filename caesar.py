@@ -8,6 +8,9 @@ def encrypt(key, plaintext):
     return ciphertext
 
 def decrypt(key,ciphertext):
-    plaintext=""
-    #YOUR CODE HERE
+    plaintext = ""
+    for i in range(len(ciphertext)):
+        wordHolder = ciphertext[i]
+        plaintext += chr((ord(wordHolder) - key - 65) % 26 +65)
+        print(plaintext)
     return plaintext
