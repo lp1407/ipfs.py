@@ -28,7 +28,7 @@ def hash_collision(k):
         var_y2 = bin(int(var_y_num, 16))[2:].zfill(terminate) #hy2 = var_y2
         varx_end = var_x2[-k:]                        #hx_trailing = varx_end
         #print("x:", hx_trailing)
-        hy_trailing = var_y2[-k:]                        #vary_end
+        vary_end = var_y2[-k:]                        #vary_end
         #print("y:", hy_trailing)
         if varx_end == vary_end:
             Converse = False
