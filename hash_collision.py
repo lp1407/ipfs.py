@@ -19,7 +19,7 @@ def hash_collision(k):
         x = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 50)).encode('utf-8')
         y = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 50)).encode('utf-8')
         var_x = hashlib.sha256(x) #hx = var_x
-        hy = hashlib.sha256(y)  #hy = var_y
+        var_y = hashlib.sha256(y)  #hy = var_y
         #compute hash in hex
         var_x_num = var_x.hexdigest()   #hx16 = var_x_num
         var_y_num = var_y.hexdigest()    #hy16 = var_y_num
