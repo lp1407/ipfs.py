@@ -10,28 +10,27 @@ def hash_collision(k):
     if k < 0:
         print( "Specify a positive number of bits" )
         return( b'\x00',b'\x00' )
-    if k > 256:
-        print( "Specify a smaller number" )
-        return( b'\x00',b'\x00' )
+    #if k > 256:
+        #return( b'\x00',b'\x00' )
     #Collision finding code goes here
-    end_length = 256
-    notEqual =  True
-    while(notEqual):
+    terminate = 256 #end_length = terminate 
+    Converse =  True #notEqual= Converse
+    while(Converse):
         x = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 50)).encode('utf-8')
         y = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 50)).encode('utf-8')
-        hx = hashlib.sha256(x)
-        hy = hashlib.sha256(y)
+        var_x = hashlib.sha256(x) #hx = var_x
+        hy = hashlib.sha256(y)  #hy = var_y
         #compute hash in hex
-        hx16 = hx.hexdigest()
-        hy16 = hy.hexdigest()
+        var_x_num = var_x.hexdigest()   #hx16 = var_x_num
+        var_y_num = var_y.hexdigest()    #hy16 = var_y_num
         #convert hex into binary string
-        hx2 = bin(int(hx16, 16))[2:].zfill(end_length)
-        hy2 = bin(int(hy16, 16))[2:].zfill(end_length)
-        hx_trailing = hx2[-k:]
+        var_x2 = bin(int(var_x_num, 16))[2:].zfill(terminate) #hx2 = var_x2
+        var_y2 = bin(int(var_y_num, 16))[2:].zfill(terminate) #hy2 = var_y2
+        varx_end = var_x2[-k:]                        #hx_trailing = varx_end
         #print("x:", hx_trailing)
-        hy_trailing = hy2[-k:]
+        hy_trailing = var_y2[-k:]                        #vary_end
         #print("y:", hy_trailing)
-        if hx_trailing == hy_trailing:
-            notEqual = False
+        if varx_end == vary_end:
+            Converse = False
     
     return( x, y )
