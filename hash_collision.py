@@ -10,8 +10,8 @@ def hash_collision(k):
     if k < 0:
         print( "Specify a positive number of bits" )
         return( b'\x00',b'\x00' )
-    #if k > 256:
-        #return( b'\x00',b'\x00' )
+    if k > 256:
+        return( b'\x00',b'\x00' )
     #Collision finding code goes here
     terminate = 256 #end_length = terminate 
     Converse =  True #notEqual= Converse
