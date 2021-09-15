@@ -1,30 +1,29 @@
 import hashlib
+import os
 import string
 import random
 
 def hash_preimage(target_string):
-    if not isinstance(target_string, str):
-        print( "Input need to be a string" )
-        return
-        
     if not all( [x in '01' for x in target_string ] ):
         print( "Input should be a string of bits" )
         return
     
-    k = len(target_string)
-    if k > 256:
-        print( "Input is too long" )
-        return
+    #Collision finding code goes here
+    letters = string.ascii_letters
+    strX = ''.join(random.choice(letters) for i in range(256))
+    x = strX.encode('utf-8')
     
-    notEqual = True
-    end_length = 256
-    while(notEqual):
-        x = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 50)).encode('utf-8')
-        hx = hashlib.sha256(x)
-        hx16 = hx.hexdigest()
-        hx2 = bin(int(hx16, 16))[2:].zfill(end_length)
-        hx_trailing = hx2[-k:]
-        if hx_trailing == target_string:
-            notEqual = False
+    isCollision = 0
+    while (isCollision == 0):
+        hashX = hashlib.sha256(x).digest()
+        intX = int.from_bytes(hashX, 'big')
+        binX = bin(intX)
+        if (binX[(len(binX) - len(target_string)):] == target_string):
+            isCollision = 1
+        else:
+            strX = ''.join(random.choice(letters) for i in range(256))
+            x = strX.encode('utf-8')
 
-    return( x )
+    nonce = x
+
+    return( nonce )
