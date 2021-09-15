@@ -24,6 +24,6 @@ def hash_preimage(target_string):
             newString = ''.join(random.choice(letters) for i in range(256))
             x = newString.encode('utf-8')
 
-    imnone = x
+    nonce = x
 
-    return( imnone )
+    return( nonce )
