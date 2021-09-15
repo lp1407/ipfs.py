@@ -20,6 +20,9 @@ def hash_preimage(target_string):
         binX = bin(intX)
         if (binX[(len(binX) - len(target_string)):] == target_string):
             isCollision = 1
+        else:
+            newString = ''.join(random.choice(letters) for i in range(256))
+            x = newString.encode('utf-8')
 
     imnone = x
 
