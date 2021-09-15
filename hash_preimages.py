@@ -10,20 +10,20 @@ def hash_preimage(target_string):
     
     #Collision finding code goes here
     letters = string.ascii_letters
-    strX = ''.join(random.choice(letters) for i in range(256))
-    x = strX.encode('utf-8')
+    newString = ''.join(random.choice(letters) for i in range(256))
+    x = newString.encode('utf-8')
     
-    isCollision = 0
-    while (isCollision == 0):
+    invCollide = 0
+    while (invCollide == 0):
         hashX = hashlib.sha256(x).digest()
         intX = int.from_bytes(hashX, 'big')
         binX = bin(intX)
         if (binX[(len(binX) - len(target_string)):] == target_string):
             isCollision = 1
         else:
-            strX = ''.join(random.choice(letters) for i in range(256))
-            x = strX.encode('utf-8')
+            newString = ''.join(random.choice(letters) for i in range(256))
+            x = newString.encode('utf-8')
 
-    nonce = x
+    imnone = x
 
-    return( nonce )
+    return( imnone )
