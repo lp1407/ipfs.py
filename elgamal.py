@@ -1,19 +1,21 @@
-import random
+from fastecdsa.curve import secp256k1
+from fastecdsa.keys import export_key, gen_keypair
 
-from params import p
-from params import g
+from fastecdsa import curve, ecdsa, keys, point
+from hashlib import sha256
 
-def keygen():
-    sk = random.randrange(1, p)
-    pk = pow(g, sk, p)
-    return pk,sk
 
-def encrypt(pk,m):
-    r = random.randrange(1, p)
-    c1 = pow(g, r, p)
-    c2 = (pow(pk, r, p) * (m % p)) % p
-    return [c1,c2]
+def sign(m):
+    # generate public key
+    # Your code here
+    private_key, public_key = gen_keypair(curve.secp256k1)
+    # generate signature
+    # Your code here
+    (r, s) = ecdsa.sign(m, private_key, curve=curve.secp256k1, hashfunc=sha256)
+    valid = ecdsa.verify((r, s), m, public_key, curve=curve.secp256k1, hashfunc=sha256)
 
-def decrypt(sk,c):
-    m = ((c[1] % p) * (pow(c[0], -sk, p))) % p
-    return m
+    print(valid)
+    assert isinstance(public_key, point.Point)
+    assert isinstance(r, int)
+    assert isinstance(s, int)
+    return public_key, [r, s]
