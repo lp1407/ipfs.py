@@ -1,29 +1,19 @@
-import hashlib
-import os
-import string
 import random
 
-def hash_preimage(target_string):
-    if not all( [x in '01' for x in target_string ] ):
-        print( "Input should be a string of bits" )
-        return
-    
-    #Collision finding code goes here
-    letters = string.ascii_letters
-    newString = ''.join(random.choice(letters) for i in range(256))
-    x = newString.encode('utf-8')
-    
-    invCollide = 0
-    while (invCollide == 0):
-        hashX = hashlib.sha256(x).digest()
-        intX = int.from_bytes(hashX, 'big')
-        binX = bin(intX)
-        if (binX[(len(binX) - len(target_string)):] == target_string):
-            isCollision = 1
-        else:
-            newString = ''.join(random.choice(letters) for i in range(256))
-            x = newString.encode('utf-8')
+from params import p
+from params import g
 
-    nonce = x
+def keygen():
+    sk = random.randrange(1, p)
+    pk = pow(g, sk, p)
+    return pk,sk
 
-    return( nonce )
+def encrypt(pk,m):
+    r = random.randrange(1, p)
+    c1 = pow(g, r, p)
+    c2 = (pow(pk, r, p) * (m % p)) % p
+    return [c1,c2]
+
+def decrypt(sk,c):
+    m = ((c[1] % p) * (pow(c[0], -sk, p))) % p
+    return m
