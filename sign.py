@@ -1,21 +1,37 @@
-from fastecdsa.curve import secp256k1
-from fastecdsa.keys import export_key, gen_keypair
+import hashlib
+class Block:
+    def __init__(self, index, timestamp, content, previous_hash):
+      self.index = index
+      self.timestamp = timestamp
+      self.content = content
+      self.previous_hash = previous_hash
+      self.hash = self.calc_hash()
+   
+    def calc_hash(self):
+      sha = hashlib.sha256()
+      sha.update(str(self.index).encode('utf-8') + 
+                 str(self.timestamp).encode('utf-8') + 
+                 str(self.content).encode('utf-8') + 
+                 str(self.previous_hash).encode('utf-8'))
+      return sha.hexdigest()
+      
+M4BlockChain = []
 
-from fastecdsa import curve, ecdsa, keys, point
-from hashlib import sha256
+from datetime import datetime
+def create_genesis_block():
+    return Block(0, datetime.now(), "Genesis Block", "0")
+    
+M4BlockChain.append(create_genesis_block())
 
 
-def sign(m):
-    # generate public key
-    # Your code here
-    private_key, public_key = gen_keypair(curve.secp256k1)
-    # generate signature
-    # Your code here
-    (r, s) = ecdsa.sign(m, private_key, curve=curve.secp256k1, hashfunc=sha256)
-    valid = ecdsa.verify((r, s), m, public_key, curve=curve.secp256k1, hashfunc=sha256)
-
-    print(valid)
-    assert isinstance(public_key, point.Point)
-    assert isinstance(r, int)
-    assert isinstance(s, int)
-    return public_key, [r, s]
+# write a function `next_block` to generate a block
+def next_block(last_block):
+    index = last_block.index+1
+    next_block = Block(index, datetime.now(), f"this is block {str(index)}", last_block.hash)
+    return next_block
+    
+# append 5 blocks to the blockchain
+def app_five(block_list):
+    for i in range(5): 
+        block_list.append(next_block(block_list[-1]))
+    return block_list
