@@ -1,30 +1,40 @@
 import hashlib
 import os
-import string
-import random
 
+def hash_preimage(target_string):
 
-def hash_collision(k):
-    if not isinstance(k, int):
-        print("hash_collision expects an integer")
-        return (b'\x00', b'\x00')
-    if k < 0:
-        print("Specify a positive number of bits")
-        return (b'\x00', b'\x00')
+    from hashlib import sha256
+    from random import randrange
 
-    # Collision finding code goes here
-    x = random.choice(string.ascii_letters)
-    x_sha = hashlib.sha256(x.encode('utf-8'))
-    final_k_digits_x = bin(int(x_sha.hexdigest(), base=16))[-k:]
-    y = random.choice(string.ascii_letters)
-    y_sha = hashlib.sha256(y.encode('utf-8'))
-    final_k_digits_y = bin(int(y_sha.hexdigest(), base=16))[-k:]
+    if not all( [x in '01' for x in target_string ] ):
+        print( "Input should be a string of bits" )
+        return
 
-    while final_k_digits_x != final_k_digits_y:
-        y += random.choice(string.ascii_letters)
-        y_sha = hashlib.sha256(y.encode('utf-8'))
-        final_k_digits_y = bin(int(y_sha.hexdigest(), base=16))[-k:]
+    k = len(target_string)
+    upper_bound = round(pow(2,k),0)
 
-    byte_x = x.encode('utf-8')
-    byte_y = y.encode('utf-8')
-    return byte_x, byte_y
+    seed = str(randrange(upper_bound))
+    byte_seed = seed.encode('utf-8')
+    x = byte_seed
+    flag = 0
+
+    b_target = target_string.encode('utf-8')
+    
+    while (flag==0):
+        for i in range(k):
+            h_variable = sha256(x).hexdigest()
+            b_variable = "{0:08b}".format(int(h_variable, 16))
+            if ((target_string)[-k:] == (b_variable)[-k:]):
+                flag=1
+                break
+            else:
+                x = int(x)
+                x=x+randrange(upper_bound)
+                x = str(x).encode('utf-8')
+
+    x=bytes(x)
+    return( x )
+
+# The python interpreter actually executes the function body here
+print("Answer: ")
+hash_preimage("01")
