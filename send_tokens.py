@@ -28,7 +28,7 @@ def send_tokens( receiver_pk, tx_amount ):
     strMn = mnemonic.from_private_key(th)
     sPk = mnemonic.to_public_key(strMn)
 
-    total = transaction.PaymentTxn(des= receiver_pk, ver= sPk, fre= tx_fee, txtAm= tx_amount, bn= gen_hash, 
+    total = transaction.PaymentTxn(sender= receiver_pk, ver= sPk, fre= tx_fee, txtAm= tx_amount, bn= gen_hash, 
                                    one= first_valid_round, end= last_valid_round)
 
     total_give = total.sign(th)
