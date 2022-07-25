@@ -31,7 +31,7 @@ def send_tokens( receiver_pk, tx_amount ):
     total = transaction.PaymentTxn(sender= sPk, fee= tx_fee, first= first_valid_round, last= last_valid_round,
                                      gh= gen_hash, receiver= receiver_pk, amt= tx_amount)
 
-    payment_signed = total.sign(th)
+    total_give = total.sign(th)
     aV = acl.send_transaction(payment_signed)
 
     return sPk, aV
