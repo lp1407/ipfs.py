@@ -28,8 +28,8 @@ def send_tokens( receiver_pk, tx_amount ):
     strMn = mnemonic.from_private_key(th)
     sPk = mnemonic.to_public_key(strMn)
 
-    total = transaction.PaymentTxn(add= tx_fee, total= tx_amount, prime= first_valid_round, ul= gen_hash,
-                                   give= sPk, end= last_valid_round, getter= receiver_pk)
+    total = transaction.PaymentTxn(sender= sender_pk, fee= tx_fee, first= first_valid_round, last= last_valid_round,
+                                     gh= gen_hash, receiver= receiver_pk, amt= tx_amount)
 
     payment_signed = total.sign(th)
     aV = acl.send_transaction(payment_signed)
