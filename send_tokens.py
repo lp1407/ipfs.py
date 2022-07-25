@@ -32,7 +32,7 @@ def send_tokens( receiver_pk, tx_amount ):
                                      gh= gen_hash, receiver= receiver_pk, amt= tx_amount)
 
     total_give = total.sign(th)
-    aV = acl.send_transaction(payment_signed)
+    aV = acl.send_transaction(total_give)
 
     return sPk, aV
 
